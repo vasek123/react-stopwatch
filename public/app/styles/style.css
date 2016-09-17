@@ -1,0 +1,29 @@
+body {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.stopwatch {
+	display: flex;
+	flex-direction: column;
+	width: 360px;
+	height: 230px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.stopwatch-buttons {
+	margin: 0 auto !important;
+}
+
+.stopwatch-timebar h2 {
+	font-size: 42px;
+	font-weight: 300;
+}
