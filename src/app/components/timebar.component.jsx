@@ -4,7 +4,7 @@ class Timebar extends Component {
 	render() {
 		return (
 			<div className="stopwatch-timebar">
-				<h2>{this.parseNumber(this.props.timeElapsed.hours)}:{this.parseNumber(this.props.timeElapsed.minutes)}:{this.parseNumber(this.props.timeElapsed.seconds)}:{this.parseNumber(this.props.timeElapsed.miliseconds)}</h2>
+				<h2>{this.parseNumber(this.props.timeElapsed.hours)}:{this.parseNumber(this.props.timeElapsed.minutes)}:{this.parseNumber(this.props.timeElapsed.seconds)}.{this.parseNumber(this.props.timeElapsed.miliseconds)}</h2>
 			</div>
 		)
 	}
@@ -17,7 +17,7 @@ class Timebar extends Component {
 			n = n.toString().substr(0, 2);
 		}
 		return n;
-	} 
+	}
 }
 
 export default Timebar;

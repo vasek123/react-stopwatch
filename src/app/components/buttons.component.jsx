@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import IconButton from 'material-ui/IconButton'
+import PlayArrowIcon from 'material-ui/svg-icons/av/play-arrow';
+import PauseIcon from 'material-ui/svg-icons/av/pause';
+import ReplayIcon from 'material-ui/svg-icons/av/replay';
 
 var style = {
-	margin: 12
+	margin: 10
 }
 
 class Buttons extends Component {
-  	render() {
-    	return (
-      		<div className="stopwatch-buttons" style={this.props.style}>
-       	 		<RaisedButton label="Start" primary={true} disabled={this.props.mode != 0} style={style} onClick={this.props.start} />
-       	 		<RaisedButton label="Stop" primary={true} disabled={this.props.mode != 1} style={style} onClick={this.props.stop} />
-      	  		<RaisedButton label="Reset" primary={true} disabled={this.props.mode != 2} style={style} onClick={this.props.reset} />
-      		</div>
-    	)
-  	}
+	render() {
+  	return (
+    	<div className="stopwatch-buttons" style={this.props.style}>
+				<IconButton tooltip={this.props.mode == 0 || this.props.mode == 2 ? 'Start' : 'Pause'} onClick={this.props.mode == 0 || this.props.mode == 2 ? this.props.start : this.props.pause}>
+					{this.props.mode == 0 || this.props.mode == 2 ? <PlayArrowIcon /> : <PauseIcon />}
+				</IconButton>
+				<IconButton tooltip="Reset" onClick={this.props.reset} disabled={this.props.mode != 2}>
+					<ReplayIcon />
+				</IconButton>
+			</div>
+    )
+  }
 }
 
 export default Buttons;

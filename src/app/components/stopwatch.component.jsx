@@ -12,6 +12,7 @@ class StopWatch extends Component {
 		this.state = {
 			mode: 0,
 			timeElapsed: {
+				initial: 0,
 				hours: 0,
 				minutes: 0,
 				seconds: 0,
@@ -21,38 +22,47 @@ class StopWatch extends Component {
 	}
 
   	render() {
-    	return (
+			return (
       		<Card className="stopwatch">
+						<CardHeader title={this.props.title} subtitle={this.props.subtitle} />
       			<CardText>
         			<Timebar timeElapsed={this.state.timeElapsed}  />
         		</CardText>
         		<CardActions>
-        			<Buttons mode={this.state.mode} start={this.start.bind(this)} stop={this.stop.bind(this)} reset={this.reset.bind(this)} />
+        			<Buttons mode={this.state.mode} start={this.startStopWatch.bind(this)} pause={this.pauseStopWatch.bind(this)} stop={this.stopStopWatch.bind(this)} reset={this.resetStopWatch.bind(this)} />
         		</CardActions>
         	</Card>
     	)
   	}
 
-  	componentWillMount() {
-  		this.setState({ initialTime: Date.now() });
+  	startStopWatch() {
+  		this.setState({ initialTime: Date.now(), mode: 1, timeElapsed: {
+				initial: this.state.timeElapsed.initial,
+				hours: this.state.timeElapsed.hours,
+				minutes: this.state.timeElapsed.minutes,
+				seconds: this.state.timeElapsed.seconds,
+				miliseconds: this.state.timeElapsed.miliseconds
+			}, interval: window.setInterval(() => { this.stopWatchTick(); }, 20) });
   	}
 
-  	start() {
-  		this.setState({ mode: 1, interval: window.setInterval(() => { this.tick(); }, 10) });
-  	}
+		pauseStopWatch() {
+			window.clearInterval(this.state.interval);
+			this.setState({ mode: 2, timeElapsed: { initial: this.state.timeElapsed.elapsed, hours: this.state.timeElapsed.hours, minutes: this.state.timeElapsed.minutes, seconds: this.state.timeElapsed.seconds, miliseconds: this.state.timeElapsed.miliseconds } })
+		}
 
-  	stop() {
+  	stopStopWatch() {
   		window.clearInterval(this.state.interval);
   		this.setState({ mode: 2 });
   	}
 
-  	reset() {
-  		this.setState({ initialTime: Date.now(), mode: 0, timeElapsed: { hours: 0, minutes: 0, seconds: 0, miliseconds: 0 } });
+  	resetStopWatch() {
+  		this.setState({ mode: 0, timeElapsed: { initial: 0, hours: 0, minutes: 0, seconds: 0, miliseconds: 0 } });
   	}
 
-  	tick() {
-  		var timeElapsed = Date.now() - this.state.initialTime;
-  		
+  	stopWatchTick() {
+  		var timeElapsed = Date.now() - this.state.initialTime + this.state.timeElapsed.initial;
+			var elapsed = timeElapsed;
+
   		var hours = Math.floor(timeElapsed / 3600000);
   		timeElapsed -= hours * 3600000;
 
@@ -66,10 +76,12 @@ class StopWatch extends Component {
 
   		this.setState({
   			timeElapsed: {
+					initial: this.state.timeElapsed.initial,
 	  			hours: hours,
 	  			minutes: minutes,
 	  			seconds: seconds,
-	  			miliseconds: miliseconds
+	  			miliseconds: miliseconds,
+					elapsed: elapsed
 	  		}
   		});
   	}

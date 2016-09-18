@@ -11,7 +11,7 @@ injectTapEventPlugin();
 
 render(
 	<MuiThemeProvider>
-  		<StopWatch />
+  		<StopWatch title="Stopwatch" subtitle="Stopwatch made using React"/>
   	</MuiThemeProvider>,
   	document.getElementById('container')
 )
