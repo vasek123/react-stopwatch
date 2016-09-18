@@ -34967,6 +34967,8 @@
 	
 	var _replay2 = _interopRequireDefault(_replay);
 	
+	var _colors = __webpack_require__(/*! material-ui/styles/colors */ 295);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34997,12 +34999,12 @@
 					_react2.default.createElement(
 						_IconButton2.default,
 						{ tooltip: this.props.mode == 0 || this.props.mode == 2 ? 'Start' : 'Pause', onClick: this.props.mode == 0 || this.props.mode == 2 ? this.props.start : this.props.pause },
-						this.props.mode == 0 || this.props.mode == 2 ? _react2.default.createElement(_playArrow2.default, null) : _react2.default.createElement(_pause2.default, null)
+						this.props.mode == 0 || this.props.mode == 2 ? _react2.default.createElement(_playArrow2.default, { color: _colors.blue500 }) : _react2.default.createElement(_pause2.default, { color: _colors.blue500 })
 					),
 					_react2.default.createElement(
 						_IconButton2.default,
 						{ tooltip: 'Reset', onClick: this.props.reset, disabled: this.props.mode != 2 },
-						_react2.default.createElement(_replay2.default, null)
+						_react2.default.createElement(_replay2.default, { color: _colors.blue500 })
 					)
 				);
 			}
